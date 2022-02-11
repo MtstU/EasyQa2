@@ -75,6 +75,20 @@ public class EqFirstTest {
         issuesPage.checkIssueAdded(issue.getCardName());
     }
 
+    @Test
+    public void deleteCard() {
+        LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
+        ProjectsPage projectsPage = loginPage.clickLoginBtn();
+        projectsPage.checkUserAuthorized();
+        ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
+        projectDashboardPage.checkProjectDashboardPage();
+        IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
+        issuesPage.checkIssuesPage();
+        issuesPage.deleteCard(issue.getCardName());
+    }
+
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
         closeWebDriver();

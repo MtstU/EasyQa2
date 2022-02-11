@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
-import static com.codeborne.selenide.Selenide.page;
-
 public class NewDefectPage {
     @FindBy(xpath = "//h1[normalize-space()='Create defect']")
     public SelenideElement createLabel;
@@ -50,15 +48,13 @@ public class NewDefectPage {
     }
 
     @Step
-    public IssuesPage addNewIssue(String issueName, String issueDesc, int issuePriority) {
+    public void addNewIssue(String issueName, String issueDesc, int issuePriority) {
         defectTitle.click();
         defectTitle.sendKeys(issueName);
         actualResult.click();
-        actualResult.setValue(issueDesc);                           //                 sendKeys(issueDesc);
+        actualResult.shouldBe(Condition.visible).setValue(issueDesc);                           //                 sendKeys(issueDesc);
         setPriority(issuePriority);
         defectSaveBtn.click();
-
-        return page(IssuesPage.class);
     }
 
     @Step
@@ -90,44 +86,44 @@ public class NewDefectPage {
 
     @Step
     public void setDefectSeverityNotSet() {
-        defectSeveritySelector.click();
-        defectSeverityNotSet.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityNotSet.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityBlocker() {
-        defectSeveritySelector.click();
-        defectSeverityBlocker.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityBlocker.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityCritical() {
-        defectSeveritySelector.click();
-        defectSeverityCritical.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityCritical.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityMajor() {
-        defectSeveritySelector.click();
-        defectSeverityMajor.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityMajor.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityNormal() {
-        defectSeveritySelector.click();
-        defectSeverityNormal.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityNormal.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityMinor() {
-        defectSeveritySelector.click();
-        defectSeverityMinor.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityMinor.shouldBe(Condition.visible).click();
     }
 
     @Step
     public void setDefectSeverityTrivial() {
-        defectSeveritySelector.click();
-        defectSeverityTrivial.click();
+        defectSeveritySelector.shouldBe(Condition.visible).click();
+        defectSeverityTrivial.shouldBe(Condition.visible).click();
     }
 }
 
