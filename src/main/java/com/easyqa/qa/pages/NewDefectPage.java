@@ -51,8 +51,8 @@ public class NewDefectPage {
     public void addNewIssue(String issueName, String issueDesc, int issuePriority) {
         defectTitle.click();
         defectTitle.sendKeys(issueName);
-        actualResult.click();
-        actualResult.shouldBe(Condition.visible).setValue(issueDesc);                           //                 sendKeys(issueDesc);
+        //actualResult.click();
+        actualResult.shouldBe(Condition.visible).setValue(issueDesc);
         setPriority(issuePriority);
         defectSaveBtn.click();
     }
@@ -125,5 +125,7 @@ public class NewDefectPage {
         defectSeveritySelector.shouldBe(Condition.visible).click();
         defectSeverityTrivial.shouldBe(Condition.visible).click();
     }
+
+
 }
 
