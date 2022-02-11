@@ -21,8 +21,37 @@ public class EqFirstTest {
     public void setUp() {
         browser = "chrome";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+    }
 
-        //Configuration.browserSize = "1600x1000";
+    @Test
+    public void createNewDefect() {
+        LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
+        ProjectsPage projectsPage = loginPage.clickLoginBtn();
+        projectsPage.checkUserAuthorized();
+        ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
+        projectDashboardPage.checkProjectDashboardPage();
+        IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
+        issuesPage.checkIssuesPage();
+        NewDefectPage newDefectPage = issuesPage.createNewDefect();
+        newDefectPage.checkNewDefectPage();
+        newDefectPage.addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
+        issuesPage.checkIssueAdded(issue.getCardName());
+    }
+
+    @Test
+    public void deleteCard() {
+        LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
+        ProjectsPage projectsPage = loginPage.clickLoginBtn();
+        projectsPage.checkUserAuthorized();
+        ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
+        projectDashboardPage.checkProjectDashboardPage();
+        IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
+        issuesPage.checkIssuesPage();
+        issuesPage.deleteCard(issue.getCardName());
     }
 
     //@Test
@@ -56,37 +85,6 @@ public class EqFirstTest {
         projectDashboardPage.checkProjectDashboardPage();
         IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
         issuesPage.checkIssuesPage();
-    }
-
-    @Test
-    public void createNewDefect() {
-        LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
-        loginPage.enterLogin(theUser.getUserEmail());
-        loginPage.enterPassword(theUser.getUserPassword());
-        ProjectsPage projectsPage = loginPage.clickLoginBtn();
-        projectsPage.checkUserAuthorized();
-        ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
-        projectDashboardPage.checkProjectDashboardPage();
-        IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
-        issuesPage.checkIssuesPage();
-        NewDefectPage newDefectPage = issuesPage.createNewDefect();
-        newDefectPage.checkNewDefectPage();
-        newDefectPage.addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
-        issuesPage.checkIssueAdded(issue.getCardName());
-    }
-
-    @Test
-    public void deleteCard() {
-        LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
-        loginPage.enterLogin(theUser.getUserEmail());
-        loginPage.enterPassword(theUser.getUserPassword());
-        ProjectsPage projectsPage = loginPage.clickLoginBtn();
-        projectsPage.checkUserAuthorized();
-        ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
-        projectDashboardPage.checkProjectDashboardPage();
-        IssuesPage issuesPage = projectDashboardPage.openDefectsPage();
-        issuesPage.checkIssuesPage();
-        issuesPage.deleteCard(issue.getCardName());
     }
 
     @AfterMethod(alwaysRun = true)
