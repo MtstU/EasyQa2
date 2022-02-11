@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java-library'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation group: 'org.testng', name: 'testng', version: '7.0.0'
+    // https://mvnrepository.com/artifact/com.codeborne/selenide
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.0.1'
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide
+    implementation group: 'io.qameta.allure', name: 'allure-selenide', version: '2.13.1'
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-testng
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.13.1'
+
+}
+
+task testbase (type: Test){
+    useTestNG{
+        suites "src/test/resources/testng.xml"
+    }
+    systemProperty 'allure.model.indentOutput', true
+    systemProperty 'allure.results.directory', 'build/allure-results'
+}
+
+testbase.doFirst {
+    jvmArgs '-Dwdm.chromeDriverVersion=98.0.4758.48'
+}

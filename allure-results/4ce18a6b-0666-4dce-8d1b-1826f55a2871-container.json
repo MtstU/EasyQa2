@@ -1,0 +1,1 @@
+{"uuid":"4ce18a6b-0666-4dce-8d1b-1826f55a2871","name":"EqFirstTest","children":["1ffa7ec1-1a2a-4618-bd54-6e7904e880fd"],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1644533416126,"stop":1644533416142}],"afters":[],"links":[],"start":1644533416079,"stop":1644533420378}
