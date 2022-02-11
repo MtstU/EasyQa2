@@ -54,7 +54,7 @@ public class EqFirstTest {
         issuesPage.deleteCard(issue.getCardName());
     }
 
-    //@Test
+    @Test
     public void loginAsRegisteredUser() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
@@ -63,7 +63,7 @@ public class EqFirstTest {
         projectsPage.checkUserAuthorized();
     }
 
-    //@Test
+    @Test
     public void openProject() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
@@ -74,7 +74,7 @@ public class EqFirstTest {
         projectDashboardPage.checkProjectDashboardPage();
     }
 
-    //@Test
+    @Test
     public void openIssuesPage() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
