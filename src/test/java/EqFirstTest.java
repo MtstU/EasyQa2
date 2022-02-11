@@ -19,12 +19,13 @@ public class EqFirstTest {
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
-        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         browser = "chrome";
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+
         //Configuration.browserSize = "1600x1000";
     }
 
-    @Test
+    //@Test
     public void loginAsRegisteredUser() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
@@ -33,7 +34,7 @@ public class EqFirstTest {
         projectsPage.checkUserAuthorized();
     }
 
-    @Test
+    //@Test
     public void openProject() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
@@ -44,7 +45,7 @@ public class EqFirstTest {
         projectDashboardPage.checkProjectDashboardPage();
     }
 
-    @Test
+    //@Test
     public void openIssuesPage() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
