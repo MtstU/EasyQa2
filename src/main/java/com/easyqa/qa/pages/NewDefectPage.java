@@ -5,6 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.sleep;
+
 public class NewDefectPage {
     @FindBy(xpath = "//h1[normalize-space()='Create defect']")
     public SelenideElement createLabel;
@@ -12,7 +15,7 @@ public class NewDefectPage {
     @FindBy(id = "title")
     public SelenideElement defectTitle;
 
-    @FindBy(xpath = "//p[@class='empty-node']")
+    @FindBy(xpath = "//div[@class='ProseMirror toastui-editor-contents']")  //  //p[@class='empty-node']
     public SelenideElement actualResult;
 
     @FindBy(xpath = "//*[@id=\"severityGroup\"]/div[1]") ////input[@id='react-select-3-input']
@@ -48,13 +51,16 @@ public class NewDefectPage {
     }
 
     @Step
-    public void addNewIssue(String issueName, String issueDesc, int issuePriority) {
-        defectTitle.click();
-        defectTitle.sendKeys(issueName);
-        //actualResult.click();
-        actualResult.shouldBe(Condition.visible).setValue(issueDesc);
+    public IssuesPage addNewIssue(String issueName, String issueDesc, int issuePriority) {
+        //TODO непонятно почему вылазит алерт, при первом внесении данных в поля текстового ввода,
+        // но если подождать, он обрабатывается нормально.
+        defectTitle.shouldBe(Condition.visible).setValue(issueName);
+        sleep(1000);
+        actualResult.shouldBe(Condition.visible).setValue(issueDesc); //TODO другой локатор от 12.01.22 16:59
         setPriority(issuePriority);
         defectSaveBtn.click();
+
+        return page(IssuesPage.class);
     }
 
     @Step
@@ -125,7 +131,5 @@ public class NewDefectPage {
         defectSeveritySelector.shouldBe(Condition.visible).click();
         defectSeverityTrivial.shouldBe(Condition.visible).click();
     }
-
-
 }
 

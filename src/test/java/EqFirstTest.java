@@ -1,29 +1,39 @@
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.easyqa.qa.pages.*;
 import com.easyqa.qa.pages.util.CardData;
 import com.easyqa.qa.pages.util.PageAddressData;
 import com.easyqa.qa.pages.util.UserData;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
+import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Configuration.browser;
+import static com.codeborne.selenide.Configuration.browserCapabilities;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
 public class EqFirstTest {
     PageAddressData pageAddressData = new PageAddressData("https://app.qase.io/login");
     UserData theUser = new UserData("molodikm@gmail.com", "1234567m");
-    CardData issue = new CardData("test2", "issue description", 1);
+    CardData issue = new CardData("testName", "issue description", 1);
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         browser = "chrome";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+
     }
 
     @Test
+    @Description("завести дефект")
+    @Severity(SeverityLevel.NORMAL)
     public void createNewDefect() {
         LoginPage loginPage = open(pageAddressData.getPageAddress(), LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
@@ -36,8 +46,9 @@ public class EqFirstTest {
         issuesPage.checkIssuesPage();
         NewDefectPage newDefectPage = issuesPage.createNewDefect();
         newDefectPage.checkNewDefectPage();
-        newDefectPage.addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
-        issuesPage.checkIssueAdded(issue.getCardName());
+        IssuesPage issuesPage1 = newDefectPage.
+                addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
+        issuesPage1.checkIssueAdded(issue.getCardName());
     }
 
     @Test
