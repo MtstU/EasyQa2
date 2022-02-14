@@ -1,4 +1,3 @@
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.easyqa.qa.pages.*;
 import com.easyqa.qa.pages.util.CardData;
@@ -8,14 +7,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
-import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Configuration.browser;
-import static com.codeborne.selenide.Configuration.browserCapabilities;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 
@@ -46,9 +42,8 @@ public class EqFirstTest {
         issuesPage.checkIssuesPage();
         NewDefectPage newDefectPage = issuesPage.createNewDefect();
         newDefectPage.checkNewDefectPage();
-        IssuesPage issuesPage1 = newDefectPage.
-                addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
-        issuesPage1.checkIssueAdded(issue.getCardName());
+        newDefectPage.addNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
+        issuesPage.checkIssueAdded(issue.getCardName());
     }
 
     @Test

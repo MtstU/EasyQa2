@@ -51,7 +51,7 @@ public class NewDefectPage {
     }
 
     @Step
-    public IssuesPage addNewIssue(String issueName, String issueDesc, int issuePriority) {
+    public void addNewIssue(String issueName, String issueDesc, int issuePriority) {
         //TODO непонятно почему вылазит алерт, при первом внесении данных в поля текстового ввода,
         // но если подождать, он обрабатывается нормально.
         defectTitle.shouldBe(Condition.visible).setValue(issueName);
@@ -60,7 +60,6 @@ public class NewDefectPage {
         setPriority(issuePriority);
         defectSaveBtn.click();
 
-        return page(IssuesPage.class);
     }
 
     @Step
